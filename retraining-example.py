@@ -1,6 +1,4 @@
-
 """
-
 Preparing model:
  - Install bazel ( check tensorflow's github for more info )
     Ubuntu 14.04:
@@ -25,29 +23,22 @@ Preparing model:
 - Go to root of tensorflow
 - bazel build tensorflow/examples/image_retraining:retrain
 - bazel-bin/tensorflow/examples/image_retraining/retrain --image_dir /path/to/root_folder_name  --output_graph /path/output_graph.pb -- output_labels /path/output_labels.txt -- bottleneck_dir /path/bottleneck
-
 ** Training done. **
-
 For testing through bazel,
-
     bazel build tensorflow/examples/label_image:label_image && \
     bazel-bin/tensorflow/examples/label_image/label_image \
     --graph=/path/output_graph.pb --labels=/path/output_labels.txt \
     --output_layer=final_result \
     --image=/path/to/test/image
-
 For testing through python, change and run this code.
 """
-
-import os
-import sys
 
 import numpy as np
 import tensorflow as tf
 
-imagePath = /path/images/image
-modelFullPath = /path/output_graph.pb
-labelsFullPath = /path/output_labels.txt
+imagePath = '/tmp/imagenet/flower.jpg'
+modelFullPath = '/tmp/output_graph.pb'
+labelsFullPath = '/tmp/output_labels.txt'
 
 
 def create_graph():
@@ -81,7 +72,7 @@ def run_inference_on_image():
         top_k = predictions.argsort()[-5:][::-1]  # Getting top 5 predictions
         f = open(labelsFullPath, 'rb')
         lines = f.readlines()
-        labels = [w.replace("\n", "") for w in lines]
+        labels = [str(w).replace("\n", "") for w in lines]
         for node_id in top_k:
             human_string = labels[node_id]
             score = predictions[node_id]
