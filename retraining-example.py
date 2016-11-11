@@ -22,7 +22,7 @@ Preparing model:
 - Clone tensorflow
 - Go to root of tensorflow
 - bazel build tensorflow/examples/image_retraining:retrain
-- bazel-bin/tensorflow/examples/image_retraining/retrain --image_dir /path/to/root_folder_name  --output_graph /path/output_graph.pb -- output_labels /path/output_labels.txt -- bottleneck_dir /path/bottleneck
+- bazel-bin/tensorflow/examples/image_retraining/retrain --image_dir /path/to/root_folder_name  --output_graph /path/output_graph.pb --output_labels /path/output_labels.txt --bottleneck_dir /path/bottleneck
 ** Training done. **
 For testing through bazel,
     bazel build tensorflow/examples/label_image:label_image && \
